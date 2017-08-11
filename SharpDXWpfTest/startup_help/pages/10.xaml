@@ -1,0 +1,34 @@
+﻿<Page x:Class="SharpDXWpfTest.startup_help.pages._10"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      mc:Ignorable="d" 
+      d:DesignHeight="300" d:DesignWidth="300"
+	Title="_10">
+
+    <Grid>
+        <FlowDocumentScrollViewer  Margin="0" VerticalScrollBarVisibility="Hidden" IsSelectionEnabled="False">
+            <FlowDocument>
+                <Paragraph TextAlignment="Center"
+                       FontSize="14pt">
+                    Tips
+                </Paragraph>
+                <Paragraph TextAlignment="Justify"
+                       FontSize="12pt">
+                    1. Rather than adding images by one, you can drag them directly from the folder and put them to the
+                    <Hyperlink NavigateUri="help/resources/category_view.xaml" RequestNavigate="Hyperlink_RequestNavigate">category view</Hyperlink> or
+                    <Hyperlink NavigateUri="help/resources/image_pool.xaml" RequestNavigate="Hyperlink_RequestNavigate">image pool</Hyperlink>.
+                </Paragraph>
+                <Paragraph TextAlignment="Justify"
+                       FontSize="12pt">
+                    2. This way, all the images are moved to one category.
+                </Paragraph>
+                <Paragraph TextAlignment="Justify"
+                       FontSize="12pt">
+                    3. Hold Left Ctrl while draging to put each image into new separate category.
+                </Paragraph>
+            </FlowDocument>
+        </FlowDocumentScrollViewer>
+    </Grid>
+</Page>

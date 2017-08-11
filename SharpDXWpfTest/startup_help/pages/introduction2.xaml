@@ -1,0 +1,29 @@
+﻿<Page x:Class="SharpDXWpfTest.startup_help.pages.introduction2"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      mc:Ignorable="d" 
+      d:DesignHeight="300" d:DesignWidth="300"
+	Title="introduction2">
+
+    <FlowDocumentScrollViewer  Margin="0" VerticalScrollBarVisibility="Hidden" IsSelectionEnabled="False">
+        <FlowDocument>
+            <Paragraph TextAlignment="Center"
+                       FontSize="14pt">
+                Ways to get help : 
+            </Paragraph>
+            <Paragraph>
+                <Bold>1.</Bold> Press "H" while cursor pointing on any UI element
+            </Paragraph>
+            <Paragraph>
+                <Bold>2.</Bold> Click
+                <Bold>SHOW HELP</Bold> button in main window to show help window
+            </Paragraph>
+            <Paragraph>
+                <Bold>3.</Bold> Check check box right next to the
+                <Bold>SHOW HELP</Bold> button in main window to show help tooltips. These tooltips contain information about UI element, name and usually short description
+            </Paragraph>
+        </FlowDocument>
+    </FlowDocumentScrollViewer>
+</Page>

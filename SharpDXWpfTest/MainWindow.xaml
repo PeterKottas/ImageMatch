@@ -1,0 +1,962 @@
+﻿<Window
+ xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+ xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+ xmlns:dpf="clr-namespace:image_match"
+ xmlns:Properties="clr-namespace:image_match.Properties" x:Class="image_match.MainWindow"
+ xmlns:shell="http://schemas.microsoft.com/winfx/2006/xaml/presentation/shell"
+ xmlns:local="clr-namespace:image_match"
+         AllowsTransparency="False" WindowStyle="None" 
+ Title="ImageMatch" Height="698" Width="990" ResizeMode="CanResizeWithGrip" Loaded="Window_Loaded" StateChanged="Window_StateChanged" MinWidth="500" MinHeight="300" MaxWidth="{DynamicResource {x:Static SystemParameters.MaximizedPrimaryScreenWidthKey}}" MaxHeight="{DynamicResource {x:Static SystemParameters.MaximizedPrimaryScreenHeightKey}}" Background="{x:Null}" >
+    
+    <Window.Resources>
+        <Style x:Key="GadgetStyle" TargetType="{x:Type local:MainWindow}">
+            <Setter Property="shell:WindowChrome.WindowChrome">
+                <Setter.Value>
+                    <shell:WindowChrome GlassFrameThickness="15" 
+                            ResizeBorderThickness="5"
+                            CaptionHeight="0"
+                                        CornerRadius="0"
+                                        UseAeroCaptionButtons="False"/>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <dpf:ValueConverter x:Key="valueToForeground" />
+        <Color x:Key="BlackColor">#FF000000</Color>
+        <Color x:Key="WhiteColor">#FFFFFFFF</Color>
+
+        <Color x:Key="Gray1">#FF333333</Color>
+        <Color x:Key="Gray2">#FF7F7F7F</Color>
+        <Color x:Key="Gray7">#FFD8D8D9</Color>
+        <Color x:Key="Gray8">#FFE0E0E0</Color>
+        <Color x:Key="Gray10">#FFF7F7F7</Color>
+
+        <Color x:Key="GrayNormal">#FFBEBEBE</Color>
+        <Color x:Key="GrayHover">#FF333333</Color>
+
+        <Color x:Key="FlyoutDarkColor">#FF252525</Color>
+        <Color x:Key="FlyoutLightColor">#FFFFFFFF</Color>
+
+
+        <!--scroll bar-->
+        <!--<SolidColorBrush x:Key="StandardBorderBrush" Color="Gray"></SolidColorBrush>-->
+        <!-- re-set brushes too -->
+        <SolidColorBrush x:Key="BlackBrush" Color="{StaticResource BlackColor}" />
+        <SolidColorBrush x:Key="TextBrush" Color="{StaticResource BlackColor}" />
+        <SolidColorBrush x:Key="LabelTextBrush" Color="{StaticResource BlackColor}" />
+        <SolidColorBrush x:Key="BlackColorBrush" Color="{StaticResource BlackColor}" />
+        <SolidColorBrush x:Key="TextBoxMouseOverInnerBorderBrush" Color="{StaticResource BlackColor}" />
+        <SolidColorBrush x:Key="TextBoxFocusBorderBrush" Color="{StaticResource BlackColor}" />
+        <SolidColorBrush x:Key="ButtonMouseOverBorderBrush" Color="{StaticResource BlackColor}" />
+        <SolidColorBrush x:Key="ButtonMouseOverInnerBorderBrush" Color="{StaticResource BlackColor}" />
+        <SolidColorBrush x:Key="ComboBoxMouseOverBorderBrush" Color="{StaticResource BlackColor}" />
+        <SolidColorBrush x:Key="ComboBoxMouseOverInnerBorderBrush" Color="{StaticResource BlackColor}" />
+
+        <SolidColorBrush x:Key="ControlBackgroundBrush" Color="{StaticResource WhiteColor}" />
+        <SolidColorBrush x:Key="WhiteBrush" Color="{StaticResource WhiteColor}" />
+        <SolidColorBrush x:Key="WhiteColorBrush" Color="{StaticResource WhiteColor}" />
+        <SolidColorBrush x:Key="DisabledWhiteBrush" Color="{StaticResource WhiteColor}" />
+        <SolidColorBrush x:Key="WindowBackgroundBrush" Color="{StaticResource WhiteColor}" />
+
+        <SolidColorBrush x:Key="{x:Static SystemColors.WindowBrushKey}" Color="{StaticResource WhiteColor}" />
+        <SolidColorBrush x:Key="{x:Static SystemColors.ControlTextBrushKey}" Color="{StaticResource BlackColor}" />
+
+        <LinearGradientBrush x:Key="CheckBoxBackgroundBrush" EndPoint="0.5,1" StartPoint="0.5,0">
+            <GradientStop Color="{StaticResource Gray7}" Offset="0" />
+            <GradientStop Color="{StaticResource WhiteColor}" Offset="1" />
+        </LinearGradientBrush>
+
+        <SolidColorBrush x:Key="GrayBrush1" Color="{StaticResource Gray1}" />
+        <SolidColorBrush x:Key="GrayBrush2" Color="{DynamicResource Gray2}"/>
+        <SolidColorBrush x:Key="GrayBrush7" Color="{StaticResource Gray7}" />
+        <SolidColorBrush x:Key="GrayBrush8" Color="{StaticResource Gray8}" />
+        <SolidColorBrush x:Key="GrayBrush10" Color="{StaticResource Gray10}" />
+
+        <SolidColorBrush x:Key="GrayNormalBrush" Color="{StaticResource GrayNormal}" />
+        <SolidColorBrush x:Key="GrayHoverBrush" Color="{StaticResource GrayHover}" />
+
+        <SolidColorBrush x:Key="CheckBoxMouseOverBrush" Color="{StaticResource Gray1}" />
+
+        <SolidColorBrush x:Key="SliderValueDisabled" Color="#FFBABABA" />
+        <SolidColorBrush x:Key="SliderTrackDisabled" Color="#FFDBDBDB" />
+        <SolidColorBrush x:Key="SliderThumbDisabled" Color="#FFA0A0A0" />
+        <SolidColorBrush x:Key="SliderTrackHover" Color="#FFD0D0D0" />
+        <SolidColorBrush x:Key="SliderTrackNormal" Color="#FFC6C6C6" />
+
+        <SolidColorBrush x:Key="FlyoutDarkBrush" Color="{StaticResource FlyoutDarkColor}" />
+        <SolidColorBrush x:Key="FlyoutLightBrush" Color="{StaticResource FlyoutLightColor}" />
+
+        <SolidColorBrush x:Key="FlatButtonPressedBackgroundBrush" Color="#222222"/>
+
+        <!-- menu brushes -->
+        <SolidColorBrush x:Key="MenuBackgroundBrush" Color="{StaticResource WhiteColor}" />
+        <SolidColorBrush x:Key="ContextMenuBackgroundBrush" Color="{StaticResource WhiteColor}" />
+        <SolidColorBrush x:Key="SubMenuBackgroundBrush" Color="{StaticResource WhiteColor}" />
+
+        <SolidColorBrush x:Key="ContextMenuBorderBrush" Color="{StaticResource BlackColor}" />
+        <SolidColorBrush x:Key="SubMenuBorderBrush" Color="{StaticResource BlackColor}" />
+
+        <SolidColorBrush x:Key="MenuItemSelectionFill" Color="#DEDEDE" />
+        <SolidColorBrush x:Key="MenuItemSelectionStroke" Color="#DEDEDE" />
+
+        <SolidColorBrush x:Key="TopMenuItemPressedFill" Color="#DEDEDE" />
+        <SolidColorBrush x:Key="TopMenuItemPressedStroke" Color="#E0717070" />
+        <SolidColorBrush x:Key="TopMenuItemSelectionStroke" Color="#90717070" />
+
+        <!-- original #FF9A9A9A" -->
+        <SolidColorBrush x:Key="DisabledMenuItemForeground" Color="{StaticResource Gray2}" />
+        <SolidColorBrush x:Key="DisabledMenuItemGlyphPanel" Color="#848589" />
+
+        <SolidColorBrush x:Key="{x:Static SystemColors.MenuTextBrushKey}" Color="{StaticResource BlackColor}" />
+
+        <Color x:Key="MenuShadowColor">#FF000000</Color>
+
+
+        <SolidColorBrush x:Key="brush_resize_grips" Color="#00000000"/>
+        <SolidColorBrush x:Key="brush_black_border" Color="Black"/>
+        <SolidColorBrush x:Key="brush_button_foreground" Color="#99FFFFFF"/>
+        <SolidColorBrush x:Key="brush_button_foreground_mouse_over" Color="White"/>
+        <SolidColorBrush x:Key="brush_button_background" Color="Transparent"/>
+        <SolidColorBrush x:Key="brush_button_background_pressed" Color="#3F000000"/>
+        <SolidColorBrush x:Key="brush_button_background_mouse_over" Color="#3FFFFFFF"/>
+        <SolidColorBrush x:Key="tab_background" Color="#FFCBCBCB"/>
+
+
+        <!--<SolidColorBrush x:Key="StandardBrush" Color="#FFA9A9A9"></SolidColorBrush>-->
+        <SolidColorBrush x:Key="PressedBrush" Color="#3F000000"/>
+        <SolidColorBrush x:Key="HoverBrush" Color="#fefefe"/>
+        <SolidColorBrush x:Key="GlyphBrush" Color="#333333"/>
+        <SolidColorBrush x:Key="StandardBrush" Color="#FF89C9EE"/>
+        <SolidColorBrush x:Key="StandardBorderBrush" Color="Black"/>
+        <!--scroll bar-->
+
+        <Color x:Key="brush_button_background_color">#00FFFFFF</Color>
+        <Color x:Key="brush_button_background_mouse_over_color" >#7FFFFFFF</Color>
+        <Color x:Key="brush_button_foreground_color">#99FFFFFF</Color>
+        <Color x:Key="brush_button_foreground_mouse_over_color" >#FFFFFFFF</Color>
+
+
+        <LinearGradientBrush x:Key="brush_gradient_tabitem_not_selected" EndPoint="0,1" StartPoint="0,0">
+            <GradientStop Color="#FF7E7E7E" Offset="0"/>
+            <GradientStop Color="#FFA9A9A9" Offset="0.1"/>
+        </LinearGradientBrush>
+        <SolidColorBrush x:Key="brush_button_background_gray" Color="#FFCBCBCB"/>
+        <SolidColorBrush x:Key="brush_button_background_mouse_pressed" Color="#7F000000"/>
+        <LinearGradientBrush x:Key="brush_gradient_background" EndPoint="1,1" StartPoint="0,0">
+            <GradientStop Color="#FF5E97DC" Offset="0"/>
+            <GradientStop Color="#FF89C9EE" Offset="1"/>
+        </LinearGradientBrush>
+        <LinearGradientBrush x:Key="brush_gradient_border" EndPoint="1,1" StartPoint="0,0">
+            <GradientStop Color="Transparent" Offset="0"/>
+            <GradientStop Color="Gray" Offset="0.5"/>
+            <GradientStop Color="Transparent" Offset="1"/>
+        </LinearGradientBrush>
+        <LinearGradientBrush x:Key="brush_gradient_border_vertical" EndPoint="0,0" StartPoint="0,1">
+            <GradientStop Color="#005E97DC" Offset="0"/>
+            <GradientStop Color="Gray" Offset="0.5"/>
+            <GradientStop Color="#0089C9EE" Offset="1"/>
+        </LinearGradientBrush>
+        <LinearGradientBrush x:Key="brush_gradient_border_vertical_white" EndPoint="0,0" StartPoint="0,1">
+            <GradientStop Color="#005E97DC" Offset="0"/>
+            <GradientStop Color="White" Offset="0.5"/>
+            <GradientStop Color="#0089C9EE" Offset="1"/>
+        </LinearGradientBrush>
+        <Style x:Key="SquareButtonStyle"
+           TargetType="{x:Type Button}">
+            <Setter Property="Foreground"
+        		Value="{StaticResource brush_button_foreground}" />
+
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Grid>
+                            <Border x:Name="BG"
+                                
+        						BorderBrush="{StaticResource brush_gradient_border_vertical}"
+        						BorderThickness="0,0,0,0"
+        						Background="Transparent" 
+        						Opacity="1"
+                                    />
+                            <ContentPresenter x:Name="contentPresenter"
+        						ContentTemplate="{TemplateBinding ContentTemplate}"
+        						HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+        						Margin="{TemplateBinding Padding}"
+        						RecognizesAccessKey="True"
+        						VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+        						OpacityMask="{x:Null}" />
+                        </Grid>
+
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Foreground" Value="{StaticResource brush_button_foreground_mouse_over}"/>
+                                <Setter TargetName="BG" Property="Background" Value="{StaticResource brush_button_background_mouse_over}"/>
+                                <Setter TargetName="BG" Property="BorderThickness" Value="1,0,1,0"/>
+                                <Setter TargetName="BG" Property="BorderBrush" Value="{StaticResource brush_gradient_border_vertical}"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="False">
+                                <Setter Property="Foreground" Value="{StaticResource brush_button_foreground}"/>
+                                <Setter TargetName="BG" Property="Background" Value="{StaticResource brush_button_background}"/>
+                                <Setter TargetName="BG" Property="BorderThickness" Value="0,0,0,0"/>
+                                <Setter TargetName="BG" Property="BorderBrush" Value="{StaticResource brush_gradient_border_vertical}"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter Property="Foreground" Value="{StaticResource brush_button_foreground_mouse_over}"/>
+                                <Setter TargetName="BG" Property="Background" Value="{StaticResource brush_button_background_pressed}"/>
+                                <Setter TargetName="BG" Property="BorderThickness" Value="1,0,1,0"/>
+                                <Setter TargetName="BG" Property="BorderBrush" Value="{StaticResource brush_gradient_border_vertical_white}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="VerticalScrollBarThumbStyle" TargetType="{x:Type Thumb}">
+            <Setter Property="IsTabStop" Value="False"/>
+            <Setter Property="Focusable" Value="False"/>
+            <Setter Property="Margin" Value="1,0,1,0" />
+            <Setter Property="BorderBrush" Value="{StaticResource StandardBorderBrush}" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Thumb}">
+                        <Rectangle Width="18" x:Name="ellipse"  Stroke="{StaticResource StandardBorderBrush}" Margin="5,5,-1,4"  
+        					Fill="{StaticResource StandardBrush}"
+        					RadiusX="4" RadiusY="4"/>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter TargetName="ellipse" Property="Fill" Value="{StaticResource HoverBrush}"/>
+                            </Trigger>
+                            <Trigger Property="IsDragging" Value="True">
+                                <Setter TargetName="ellipse" Property="Fill" Value="{StaticResource PressedBrush}"/>
+                            </Trigger>
+
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="HorizontalScrollBarThumbStyle" TargetType="{x:Type Thumb}">
+            <Setter Property="IsTabStop" Value="False"/>
+            <Setter Property="Focusable" Value="False"/>
+            <Setter Property="Margin" Value="0,1,0,1" />
+            <Setter Property="BorderBrush" Value="{StaticResource StandardBorderBrush}" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Thumb}">
+                        <Rectangle Height="8" x:Name="ellipse"  Stroke="{StaticResource StandardBorderBrush}"
+        					Fill="{StaticResource StandardBrush}"
+        					RadiusX="5" RadiusY="5"/>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter TargetName="ellipse" Property="Fill" Value="{StaticResource HoverBrush}"/>
+                            </Trigger>
+                            <Trigger Property="IsDragging" Value="True">
+                                <Setter TargetName="ellipse" Property="Fill" Value="{StaticResource PressedBrush}"/>
+                            </Trigger>
+
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="LineButtonUpStyle" TargetType="{x:Type RepeatButton}">
+            <Setter Property="Focusable" Value="False"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type RepeatButton}">
+                        <Grid Margin="0" Height="18" >
+                            <Path Stretch="Fill" HorizontalAlignment="Center" Margin="0,0,0,0" 
+        						VerticalAlignment="Center" x:Name="Path"  Fill="{StaticResource StandardBrush}"
+        						Data="M 0,0 L 0,7.5 A 2.5,2.5 45 0 0 2.5,10 L 10,10 L 10 0"/>
+                            <Path Stretch="Fill" HorizontalAlignment="Center" Margin="0,0,0,0" Stroke="{StaticResource StandardBorderBrush}" StrokeStartLineCap="Square" StrokeEndLineCap="Square"
+        						VerticalAlignment="Center" x:Name="Path2" Data="M 0,0 L 0,7.5 A 2.5,2.5 45 0 0 2.5,10 L 10,10"/>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter TargetName="Path" Property="Fill"
+        							Value="{StaticResource HoverBrush}" />
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="true">
+                                <Setter TargetName="Path" Property="Fill"
+        							Value="{StaticResource PressedBrush}" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="LineButtonDownStyle" TargetType="{x:Type RepeatButton}">
+            <Setter Property="Focusable" Value="False"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type RepeatButton}">
+                        <Grid Margin="0" Height="17" >
+                            <Path Stretch="Fill" HorizontalAlignment="Center" Margin="0,0,0,-1" 
+        						VerticalAlignment="Center" x:Name="Path"  Fill="{StaticResource StandardBrush}"
+        						Data="M 10,0 L 2.5,0 A 2.5,2.5 45 0 0 0,2.5 L 0,10 L 10 10"/>
+                            <Path Stretch="Fill" HorizontalAlignment="Center" Margin="0,0,0,-1" Stroke="{StaticResource StandardBorderBrush}" StrokeStartLineCap="Square" StrokeEndLineCap="Square"
+        						VerticalAlignment="Center" x:Name="Path2" Data="M 10,0 L 2.5,0 A 2.5,2.5 45 0 0 0,2.5 L 0,10 "/>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter TargetName="Path" Property="Fill"
+        							Value="{StaticResource HoverBrush}" />
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="true">
+                                <Setter TargetName="Path" Property="Fill"
+        							Value="{StaticResource PressedBrush}" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="LineButtonLeftStyle" TargetType="{x:Type RepeatButton}">
+            <Setter Property="Focusable" Value="False"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type RepeatButton}">
+                        <Grid Margin="1" Width="18" >
+                            <Path Stretch="None" HorizontalAlignment="Center"
+        						VerticalAlignment="Center" x:Name="Path"  Fill="{StaticResource StandardBrush}"
+        						Data="M 0 0 L -8 4 L 0 8 Z"/>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter TargetName="Path" Property="Fill"
+        							Value="{StaticResource HoverBrush}" />
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="true">
+                                <Setter TargetName="Path" Property="Fill"
+        							Value="{StaticResource PressedBrush}" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="LineButtonRightStyle" TargetType="{x:Type RepeatButton}">
+            <Setter Property="Focusable" Value="False"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type RepeatButton}">
+                        <Grid Margin="1" Width="18" >
+                            <Path Stretch="None" HorizontalAlignment="Center"
+        						VerticalAlignment="Center" x:Name="Path"  Fill="{StaticResource StandardBrush}"
+        						Data="M 0 0 L 8 4 L 0 8 Z"/>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter TargetName="Path" Property="Fill"
+        							Value="{StaticResource HoverBrush}" />
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="true">
+                                <Setter TargetName="Path" Property="Fill"
+        							Value="{StaticResource PressedBrush}" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="ScrollBarPageButtonStyle" TargetType="{x:Type RepeatButton}">
+            <Setter Property="IsTabStop" Value="False"/>
+            <Setter Property="Focusable" Value="False"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type RepeatButton}">
+                        <Border Background="Transparent" />
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <ControlTemplate x:Key="VerticalScrollBar" TargetType="{x:Type ScrollBar}">
+            <Grid Background="Transparent">
+                <Grid.RowDefinitions>
+                    <RowDefinition MaxHeight="18"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition MaxHeight="18"/>
+                </Grid.RowDefinitions>
+
+                <RepeatButton Grid.Row="0" Height="18"
+        			Style="{StaticResource LineButtonUpStyle}"
+        			Command="ScrollBar.LineUpCommand" />
+
+                <Track x:Name="PART_Track" Grid.Row="1" IsDirectionReversed="True" >
+                    <Track.DecreaseRepeatButton>
+                        <RepeatButton Command="ScrollBar.PageUpCommand"
+        					Style="{StaticResource ScrollBarPageButtonStyle}"/>
+                    </Track.DecreaseRepeatButton>
+                    <Track.Thumb>
+                        <Thumb Style="{StaticResource VerticalScrollBarThumbStyle}"/>
+                    </Track.Thumb>
+                    <Track.IncreaseRepeatButton>
+                        <RepeatButton Command="ScrollBar.PageDownCommand"
+        					Style="{StaticResource ScrollBarPageButtonStyle}"/>
+                    </Track.IncreaseRepeatButton>
+                </Track>
+
+                <RepeatButton Grid.Row="2" Height="18"
+        			Style="{StaticResource LineButtonDownStyle}"
+        			Command="ScrollBar.LineDownCommand"/>
+            </Grid>
+        </ControlTemplate>
+        <ControlTemplate x:Key="HorizontalScrollBar" TargetType="{x:Type ScrollBar}">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition MaxWidth="18"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition MaxWidth="18"/>
+                </Grid.ColumnDefinitions>
+                <Grid.Background>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                        <GradientStop Offset="0" Color="#4c4c4c"/>
+                        <GradientStop Offset="1" Color="#434343"/>
+                    </LinearGradientBrush>
+                </Grid.Background>
+                <RepeatButton Grid.Column="0" Width="18"
+        			Style="{StaticResource LineButtonLeftStyle}"
+        			Command="ScrollBar.LineLeftCommand" />
+
+                <Track x:Name="PART_Track" Grid.Column="1" IsDirectionReversed="False" >
+                    <Track.DecreaseRepeatButton>
+                        <RepeatButton Command="ScrollBar.PageLeftCommand"
+        					Style="{StaticResource ScrollBarPageButtonStyle}"/>
+                    </Track.DecreaseRepeatButton>
+                    <Track.Thumb>
+                        <Thumb Style="{StaticResource HorizontalScrollBarThumbStyle}"/>
+                    </Track.Thumb>
+                    <Track.IncreaseRepeatButton>
+                        <RepeatButton Command="ScrollBar.PageRightCommand"
+        					Style="{StaticResource ScrollBarPageButtonStyle}"/>
+                    </Track.IncreaseRepeatButton>
+                </Track>
+                <RepeatButton Grid.Column="2" Width="18"
+        			Style="{StaticResource LineButtonRightStyle}"
+        			Command="ScrollBar.LineRightCommand"/>
+            </Grid>
+        </ControlTemplate>
+        <Style x:Key="ScrollBar" TargetType="{x:Type ScrollBar}">
+            <Setter Property="SnapsToDevicePixels" Value="True"/>
+            <Setter Property="OverridesDefaultStyle" Value="true"/>
+            <Style.Triggers>
+                <Trigger Property="Orientation" Value="Vertical">
+                    <Setter Property="Width" Value="18"/>
+                    <Setter Property="Height" Value="Auto" />
+                    <Setter Property="Template" Value="{StaticResource VerticalScrollBar}" />
+                </Trigger>
+                <Trigger Property="Orientation" Value="Horizontal">
+                    <Setter Property="Width" Value="Auto"/>
+                    <Setter Property="Height" Value="18" />
+                    <Setter Property="Template" Value="{StaticResource HorizontalScrollBar}" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style TargetType="{x:Type Button}">
+            <Setter Property="MinHeight"
+                Value="25" />
+            <Setter Property="Background"
+                Value="{DynamicResource GrayBrush10}" />
+            <Setter Property="BorderBrush"
+                Value="{DynamicResource TextBoxBorderBrush}" />
+            <Setter Property="Foreground"
+                Value="{DynamicResource TextBrush}" />
+            <Setter Property="Padding"
+                Value="10,3,10,3" />
+            <Setter Property="BorderThickness"
+                Value="1" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Grid>
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup x:Name="CommonStates">
+                                    <VisualState x:Name="Normal" />
+                                    <VisualState x:Name="MouseOver">
+                                        <Storyboard>
+                                            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)"
+                                				Storyboard.TargetName="MouseOverBorder">
+                                                <EasingDoubleKeyFrame KeyTime="0"
+                                					Value="1" />
+                                            </DoubleAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="Pressed">
+                                        <Storyboard>
+                                            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)"
+                                				Storyboard.TargetName="PressedBorder">
+                                                <EasingDoubleKeyFrame KeyTime="0"
+                                					Value="1" />
+                                            </DoubleAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="Disabled">
+                                        <Storyboard>
+                                            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="Opacity"
+                                				Storyboard.TargetName="DisabledVisualElement">
+                                                <SplineDoubleKeyFrame KeyTime="0"
+                                					Value="0.7" />
+                                            </DoubleAnimationUsingKeyFrames>
+                                            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)"
+                                				Storyboard.TargetName="contentPresenter">
+                                                <EasingDoubleKeyFrame KeyTime="0"
+                                					Value="0.3" />
+                                            </DoubleAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                </VisualStateGroup>
+                                <VisualStateGroup x:Name="FocusStates">
+                                    <VisualState x:Name="Focused">
+                                        <Storyboard>
+                                            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)"
+                                				Storyboard.TargetName="FocusRectangle">
+                                                <EasingDoubleKeyFrame KeyTime="0"
+                                					Value="1" />
+                                            </DoubleAnimationUsingKeyFrames>
+                                            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)"
+                                				Storyboard.TargetName="FocusInnerRectangle">
+                                                <EasingDoubleKeyFrame KeyTime="0"
+                                					Value="1" />
+                                            </DoubleAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="Unfocused" />
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+                            <Border x:Name="Background"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                Background="{TemplateBinding Background}"
+                                CornerRadius="3" />
+                            <Rectangle x:Name="DisabledVisualElement"
+                                   Fill="{DynamicResource ControlsDisabledBrush}"
+                                   IsHitTestVisible="false"
+                                   Opacity="0"
+                                   RadiusY="3"
+                                   RadiusX="3" />
+                            <Border x:Name="MouseOverBorder"
+                                Background="{DynamicResource GrayBrush8}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="3.5"
+                                Opacity="0" />
+                            <Border x:Name="PressedBorder"
+                                Background="{DynamicResource GrayBrush7}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="3.5"
+                                Opacity="0" />
+                            <Rectangle x:Name="FocusRectangle"
+                                   Stroke="{DynamicResource ButtonMouseOverInnerBorderBrush}"
+                                   RadiusY="4"
+                                   RadiusX="4"
+                                   Margin="-1"
+                                   Opacity="0" />
+                            <Rectangle x:Name="FocusInnerRectangle"
+                                   StrokeThickness="{TemplateBinding BorderThickness}"
+                                   Stroke="{DynamicResource ButtonMouseOverBorderBrush}"
+                                   RadiusX="3"
+                                   RadiusY="3"
+                                   Opacity="0" />
+                            <ContentPresenter x:Name="contentPresenter"
+                                          RecognizesAccessKey="True"
+                                          ContentTemplate="{TemplateBinding ContentTemplate}"
+                                          HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                          Margin="{TemplateBinding Padding}"
+                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+    </Window.Resources>
+
+    
+    <Grid x:Name="app_grid" Margin="0">
+        
+        <Border x:Name="ShadowBorder" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Column="1" Grid.Row="1">
+            <Grid Margin="0">
+                <Border x:Name="MainBorder" BorderBrush="{StaticResource brush_gradient_background}"  BorderThickness="2">
+                    <Grid x:Name="MainGrid" Margin="0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="30"/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Border x:Name="TitleBar" Background="{StaticResource brush_gradient_background}" BorderBrush="Black" BorderThickness="0,0,0,1" MouseDown="TitleBar_MouseDown" MouseMove="TitleBar_MouseMove" MouseUp="TitleBar_MouseUp"/>
+                        <Button x:Name="show_help_button" Style="{StaticResource SquareButtonStyle}" HorizontalAlignment="Right" Margin="0,-1,97,1" Click="show_help_button_Click" ToolTip="Show help" ToolTipOpening="tooltip_opening">
+                            <TextBlock Text="SHOW HELP" Margin="28,-1,0,0" FontSize="16" FontFamily="Segoe UI Light" Width="94" />
+                        </Button>
+                        <CheckBox Focusable="False" HorizontalAlignment="Right" Margin="0,5,199,0" VerticalAlignment="Top" RenderTransformOrigin="0.494,0.167" Background="#7FAAAAAA" BorderBrush="{x:Null}" Foreground="White" Click="CheckBox_Click" ToolTip="Toggle tooltip help" ToolTipOpening="tooltip_opening">
+                            <CheckBox.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform ScaleX="1.6" ScaleY="1.6"/>
+                                    <SkewTransform/>
+                                    <RotateTransform/>
+                                    <TranslateTransform/>
+                                </TransformGroup>
+                            </CheckBox.RenderTransform>
+
+
+
+                        </CheckBox>
+                        <Border BorderBrush="#33898686" BorderThickness="0" HorizontalAlignment="Right" Height="30" Margin="0,0,94,0" VerticalAlignment="Top" Width="1" Background="{DynamicResource brush_gradient_border_vertical}"/>
+                        <Border Margin="0,0,0,1" Width="139" HorizontalAlignment="Left" MouseDown="TitleBar_MouseDown">
+                            <TextBlock TextWrapping="Wrap" Text="IMAGE MATCH" VerticalAlignment="Center" Foreground="{DynamicResource brush_button_foreground_mouse_over}" Margin="5,0,-57,1" FontSize="20" FontFamily="Segoe UI Light" Width="130" HorizontalAlignment="Left" />
+                        </Border>
+                        <Button x:Name="close_but" Style="{StaticResource SquareButtonStyle}" HorizontalAlignment="Right" Margin="0,-1,-1,0" Width="31" Click="close_window" ToolTip="Close" ToolTipOpening="tooltip_opening">
+                            <Path Data="F1M0,0L2,0 5,3 8,0 10,0 6,4 10,8 8,8 5,5 2,8 0,8 4,4 0,0z"
+								SnapsToDevicePixels="True"
+								Fill="{Binding Foreground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Button}}}" />
+                        </Button>
+                        <Button x:Name="maximize_but" Style="{StaticResource SquareButtonStyle}" HorizontalAlignment="Right" Width="{Binding ActualHeight, ElementName=close_but}" Margin="0,-1,30,0" Height="31" VerticalAlignment="Top" Click="maximize_window" ToolTip="Maximize" ToolTipOpening="tooltip_opening">
+                            <Grid>
+                                <Path x:Name="MaximisePath"
+									SnapsToDevicePixels="True"
+									Data="F1M0,0L0,9 9,9 9,0 0,0 0,3 8,3 8,8 1,8 1,3z"
+									Fill="{Binding Foreground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Button}}}" 
+									Visibility="Visible"/>
+                                <Path x:Name="RestorePath"
+									SnapsToDevicePixels="True"
+									Data="F1M0,10L0,3 3,3 3,0 10,0 10,2 4,2 4,3 7,3 7,6 6,6 6,5 1,5 1,10z M1,10L7,10 7,7 10,7 10,2 9,2 9,6 6,6 6,9 1,9z"
+									Fill="{Binding Foreground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Button}}}" Visibility="Hidden"/>
+                            </Grid>
+                        </Button>
+                        <Button x:Name="minimize_but" Style="{StaticResource SquareButtonStyle}" HorizontalAlignment="Right" Width="{Binding ActualHeight, ElementName=close_but}" Margin="0,-1,61,0" Click="minimize_window" ToolTip="Minimize" ToolTipOpening="tooltip_opening">
+                            <Path Data="F1M0,6L0,9 9,9 9,6 0,6z"
+								SnapsToDevicePixels="True"
+								Fill="{Binding Foreground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Button}}}" />
+                        </Button>
+                        <Grid Grid.Row="1" Background="{StaticResource brush_gradient_background}">
+                            <TabControl x:Name="tab_control" SelectionChanged="TabControl_SelectionChanged">
+                                <TabControl.Resources>
+                                    <Style TargetType="{x:Type TabControl}" >
+                                        <Setter Property="Margin" Value="0"/>
+                                        <Setter Property="BorderBrush" Value="Black"/>
+                                        <Setter Property="BorderThickness" Value="1,0,1,1"/>
+                                        <Setter Property="TabStripPlacement" Value="Bottom"/>
+                                    </Style>
+                                    <Style TargetType="{x:Type TabItem}">
+                                        <Setter Property="Height" Value="30"/>
+                                        <Setter Property="Margin" Value="0,-2,0,0"/>
+                                        <Setter Property="Template">
+
+                                            <Setter.Value>
+                                                <ControlTemplate TargetType="{x:Type TabItem}">
+                                                    <Border x:Name="Border" BorderThickness="1,0,1,1" BorderBrush="Black" CornerRadius="0,0,6,6" Margin="5,0,5,4" Background="#FFA9A9A9" >
+                                                        <ContentPresenter x:Name="ContentSite"
+                                                          
+															VerticalAlignment="Center"
+															HorizontalAlignment="Center"
+															ContentSource="Header"
+															Margin="20,4"/>
+                                                    </Border>
+                                                    <ControlTemplate.Triggers>
+                                                        <Trigger Property="IsSelected" Value="True">
+                                                            <Setter Property="Margin" Value="0,-3,0,0"/>
+                                                            <Setter Property="FontSize" Value="18"/>
+                                                            <Setter Property="Height" Value="40"/>
+                                                            <Setter Property="Foreground" Value="Black"/>
+                                                            <Setter TargetName="Border" Property="Background" Value="#FFCBCBCB"/>
+                                                        </Trigger>
+                                                        <Trigger Property="IsSelected" Value="False">
+                                                            <Setter Property="Margin" Value="0,-2,0,0"/>
+                                                            <Setter Property="FontSize" Value="12"/>
+                                                            <Setter Property="Height" Value="30"/>
+                                                            <Setter Property="Foreground" Value="White"/>
+                                                            <Setter TargetName="Border" Property="Background" Value="{StaticResource brush_gradient_tabitem_not_selected}"/>
+                                                        </Trigger>
+                                                        <Trigger Property="IsEnabled" Value="True">
+                                                            <Trigger.EnterActions>
+                                                                <BeginStoryboard>
+                                                                    <Storyboard>
+                                                                        <DoubleAnimation Storyboard.TargetProperty="Opacity" To="1" Duration="0:0:1" />
+
+                                                                    </Storyboard>
+                                                                </BeginStoryboard>
+                                                            </Trigger.EnterActions>
+                                                            <Trigger.ExitActions>
+                                                                <BeginStoryboard>
+                                                                    <Storyboard>
+                                                                        <DoubleAnimation Storyboard.TargetProperty="Opacity" To="0.2" Duration="0:0:1" />
+                                                                    </Storyboard>
+                                                                </BeginStoryboard>
+                                                            </Trigger.ExitActions>
+                                                        </Trigger>
+                                                    </ControlTemplate.Triggers>
+                                                </ControlTemplate>
+                                            </Setter.Value>
+                                        </Setter>
+                                    </Style>
+                                </TabControl.Resources>
+                                <TabControl.Template>
+                                    <ControlTemplate TargetType="{x:Type TabControl}">
+                                        <Grid ClipToBounds="True" KeyboardNavigation.TabNavigation="Local" SnapsToDevicePixels="False">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition x:Name="ColumnDefinition0" Width="*"/>
+                                                <ColumnDefinition x:Name="ColumnDefinition2" Width="0"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition x:Name="RowDefinition0" Height="*"/>
+                                                <RowDefinition x:Name="RowDefinition1" Height="42"/>
+                                            </Grid.RowDefinitions>
+                                            <DockPanel
+												x:Name="HeaderPanel"
+												Grid.Column="0"
+												Grid.Row="1"
+												Margin="2,2,2,0"
+												Panel.ZIndex="1"
+												IsItemsHost="True"
+												KeyboardNavigation.TabIndex="1"/>
+                                            <Border
+												x:Name="ContentPanel"
+												Grid.Column="0"
+												Grid.Row="0"
+												Background="{TemplateBinding Panel.Background}"
+												BorderBrush="{TemplateBinding Border.BorderBrush}"
+												BorderThickness="{TemplateBinding Border.BorderThickness}"
+												KeyboardNavigation.DirectionalNavigation="Contained"
+												KeyboardNavigation.TabIndex="2"
+												KeyboardNavigation.TabNavigation="Local">
+                                                <ContentPresenter
+													x:Name="PART_SelectedContentHost"
+													Margin="{TemplateBinding Padding}"
+													Content="{TemplateBinding SelectedContent}"
+													ContentSource="SelectedContent"
+													ContentStringFormat="{TemplateBinding SelectedContentStringFormat}"
+													ContentTemplate="{TemplateBinding SelectedContentTemplate}"
+													SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+                                            </Border>
+                                        </Grid>
+                                    </ControlTemplate>
+                                </TabControl.Template>
+                                <TabItem x:Name="resources_tab_item"  Header="Resources" VerticalAlignment="Top" >
+                                    <Grid x:Name="canvas_grid" Margin="-4" Background="#FFCBCBCB">
+                                        <dpf:resources_ui Stretch="Fill" x:Name="r_ui" Margin="0"/>
+                                        <ScrollBar Tag="help/ui_elements/resources/image_pool_scroll_bar.xaml" x:Name="scroll_bar_pool" HorizontalAlignment="Right" Width="15" Maximum="0" ViewportSize="50" Background="{x:Null}" Margin="0" LargeChange="40" SmallChange="10" ToolTip="Image pool scroll bar" ToolTipOpening="tooltip_opening"/>
+                                        <ScrollBar Tag="help/ui_elements/resources/category_view_scroll_bar.xaml" x:Name="scroll_bar_scene" HorizontalAlignment="Left" Width="15" Maximum="0" ViewportSize="50" Background="{x:Null}" Margin="0" SmallChange="10" LargeChange="40" ToolTip="Category view scroll bar" ToolTipOpening="tooltip_opening"/>
+                                    </Grid>
+                                </TabItem>
+                                <TabItem Header="Generate match" VerticalAlignment="Top"  >
+                                    <Grid Margin="-4" Background="#FFCBCBCB">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="102"/>
+                                            <RowDefinition Height="10"/>
+                                            <RowDefinition/>
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="317*"/>
+                                            <ColumnDefinition Width="10"/>
+                                            <ColumnDefinition Width="316*"/>
+                                            <ColumnDefinition Width="10"/>
+                                            <ColumnDefinition Width="317*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Border BorderBrush="#FF666466" BorderThickness="2" Margin="10,0,0,10" CornerRadius="4" Grid.Row="2">
+                                            <Grid>
+                                                <StackPanel Margin="0">
+                                                    <TextBlock HorizontalAlignment="Center" TextWrapping="WrapWithOverflow" Text="Detector" VerticalAlignment="Top" Margin="5" FontWeight="Bold" Foreground="Black"/>
+                                                    <Border BorderBrush="{DynamicResource GrayHoverBrush}" BorderThickness="0,1,0,0" Height="3" VerticalAlignment="Top" Margin="15,0"/>
+
+                                                    <Expander Header="Basic" VerticalAlignment="Top" Margin="5,5" IsExpanded="True"/>
+                                                    <Expander Header="Matching" VerticalAlignment="Top" Margin="5,5" IsExpanded="True">
+                                                        <StackPanel Background="#FFE5E5E5">
+                                                            <Border BorderBrush="#FF575757" BorderThickness="1" Height="28" Margin="10" VerticalAlignment="Top">
+                                                                <Grid>
+                                                                    <Grid.ColumnDefinitions>
+                                                                        <ColumnDefinition Width="141*"/>
+                                                                        <ColumnDefinition Width="145*"/>
+                                                                    </Grid.ColumnDefinitions>
+                                                                    <Label FontSize="12" Content="Matches count " BorderBrush="Black" BorderThickness="0,0,1,0" Background="#FF917E7E" Foreground="White"/>
+                                                                    <TextBox x:Name="matches_count_tb3" TextWrapping="Wrap" Text="100" BorderBrush="{x:Null}" BorderThickness="0" VerticalContentAlignment="Center" FontSize="16" Grid.Column="1"/>
+                                                                </Grid>
+                                                            </Border>
+                                                            <Button Content="Generate fake" HorizontalAlignment="Right" Margin="0,5,10,10" VerticalAlignment="Top" BorderBrush="#FF5D5D5D" Click="generate_fake_button_click"/>
+                                                        </StackPanel>
+                                                    </Expander>
+                                                </StackPanel>
+
+                                            </Grid>
+                                        </Border>
+                                        <Border BorderBrush="#FF666466" BorderThickness="2" Margin="0,0,0,10" CornerRadius="4" Grid.Column="2" Grid.Row="2">
+                                            <Grid>
+                                                <StackPanel Margin="0">
+                                                    <TextBlock HorizontalAlignment="Center" TextWrapping="WrapWithOverflow" Text="Descriptor" VerticalAlignment="Top" Margin="5" FontWeight="Bold" Foreground="Black"/>
+                                                    <Border BorderBrush="{DynamicResource GrayHoverBrush}" BorderThickness="0,1,0,0" Height="3" VerticalAlignment="Top" Margin="15,0"/>
+
+                                                    <Expander Header="Image feature points" VerticalAlignment="Top" Margin="5,5">
+                                                        <DataGrid Margin="0,0,-2,0" Height="250" RowHeight="50">
+                                                            <DataGrid.Columns>
+                                                                <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="Image name"/>
+                                                                <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="Next image"/>
+                                                            </DataGrid.Columns>
+                                                            <!--<DataGridTemplateColumn>
+                                                                <DataGridTemplateColumn.CellTemplate>
+                                                                    <DataTemplate>
+                                                                        <Button Width="50" Height="25" >Details</Button>
+                                                                    </DataTemplate>
+                                                                </DataGridTemplateColumn.CellTemplate>
+                                                            </DataGridTemplateColumn>-->
+                                                        </DataGrid>
+                                                    </Expander>
+
+                                                    <Expander Header="Matching" VerticalAlignment="Top" Margin="5,5">
+                                                        <StackPanel Background="#FFE5E5E5"/>
+                                                    </Expander>
+
+                                                </StackPanel>
+
+                                            </Grid>
+                                        </Border>
+                                        <Border BorderBrush="#FF666466" BorderThickness="2" Margin="0,0,10,10" CornerRadius="4" Grid.Column="4" Grid.Row="2">
+                                            <Grid>
+                                                <StackPanel Margin="0">
+                                                    <TextBlock HorizontalAlignment="Center" TextWrapping="WrapWithOverflow" Text="Matcher" VerticalAlignment="Top" Margin="5" FontWeight="Bold" Foreground="Black"/>
+                                                    <Border BorderBrush="{DynamicResource GrayHoverBrush}" BorderThickness="0,1,0,0" Height="3" VerticalAlignment="Top" Margin="15,0"/>
+
+                                                    <Expander Header="Basic" VerticalAlignment="Top" Margin="5,5" IsExpanded="True">
+                                                        <StackPanel Background="#FFE5E5E5"/>
+                                                    </Expander>
+
+                                                    <Expander Header="Detector" VerticalAlignment="Top" Margin="5,5">
+                                                        <StackPanel Background="#FFE5E5E5">
+                                                            <Border BorderBrush="#FF575757" BorderThickness="1" Height="28" Margin="10,10,10,5" VerticalAlignment="Top">
+                                                                <Grid>
+                                                                    <Grid.ColumnDefinitions>
+                                                                        <ColumnDefinition Width="141*"/>
+                                                                        <ColumnDefinition Width="145*"/>
+                                                                    </Grid.ColumnDefinitions>
+                                                                    <Label FontSize="12" Content="Matches count " BorderBrush="Black" BorderThickness="0,0,1,0" Background="#FF917E7E" Foreground="White"/>
+                                                                    <TextBox x:Name="matches_count_tb9" TextWrapping="Wrap" Text="1000" BorderBrush="{x:Null}" BorderThickness="0" VerticalContentAlignment="Center" FontSize="16" Grid.Column="1"/>
+                                                                </Grid>
+                                                            </Border>
+                                                            <Button Content="Generate points" HorizontalAlignment="Right" Margin="0,5,10,10" VerticalAlignment="Top" BorderBrush="#FF5D5D5D" Click="generate_button_click"/>
+                                                        </StackPanel>
+                                                    </Expander>
+                                                    <Expander Header="Descriptor" VerticalAlignment="Top" Margin="5,5">
+                                                        <StackPanel Background="#FFE5E5E5">
+                                                            <Border BorderBrush="#FF575757" BorderThickness="1" Height="28" Margin="10" VerticalAlignment="Top">
+                                                                <Grid>
+                                                                    <Grid.ColumnDefinitions>
+                                                                        <ColumnDefinition Width="141*"/>
+                                                                        <ColumnDefinition Width="145*"/>
+                                                                    </Grid.ColumnDefinitions>
+                                                                    <Label FontSize="12" Content="Matches count " BorderBrush="Black" BorderThickness="0,0,1,0" Background="#FF917E7E" Foreground="White"/>
+                                                                    <TextBox x:Name="matches_count_tb10" TextWrapping="Wrap" Text="1000" BorderBrush="{x:Null}" BorderThickness="0" VerticalContentAlignment="Center" FontSize="16" Grid.Column="1"/>
+                                                                </Grid>
+                                                            </Border>
+                                                            <Button Content="Generate descriptors" HorizontalAlignment="Right" Margin="0,5,10,10" VerticalAlignment="Top" BorderBrush="#FF5D5D5D" Click="generate_button_click"/>
+                                                        </StackPanel>
+                                                    </Expander>
+                                                    <Expander Header="Matching" VerticalAlignment="Top" Margin="5,5">
+                                                        <StackPanel Background="#FFE5E5E5">
+                                                            <Border BorderBrush="#FF575757" BorderThickness="1" Height="28" Margin="10" VerticalAlignment="Top">
+                                                                <Grid>
+                                                                    <Grid.ColumnDefinitions>
+                                                                        <ColumnDefinition Width="141*"/>
+                                                                        <ColumnDefinition Width="145*"/>
+                                                                    </Grid.ColumnDefinitions>
+                                                                    <Label FontSize="12" Content="Matches count " BorderBrush="Black" BorderThickness="0,0,1,0" Background="#FF917E7E" Foreground="White"/>
+                                                                    <TextBox x:Name="matches_count_tb11" TextWrapping="Wrap" Text="1000" BorderBrush="{x:Null}" BorderThickness="0" VerticalContentAlignment="Center" FontSize="16" Grid.Column="1"/>
+                                                                </Grid>
+                                                            </Border>
+                                                            <Button Content="Generate matches" HorizontalAlignment="Right" Margin="0,5,10,10" VerticalAlignment="Top" BorderBrush="#FF5D5D5D" Click="generate_button_click"/>
+                                                        </StackPanel>
+                                                    </Expander>
+
+                                                </StackPanel>
+
+                                            </Grid>
+                                        </Border>
+                                        <GridSplitter Grid.Column="1" HorizontalAlignment="Center" Width="10" Background="{StaticResource brush_button_background_gray}" Grid.Row="2"/>
+                                        <GridSplitter Grid.Column="3" HorizontalAlignment="Center" Width="10" Background="{StaticResource brush_button_background_gray}" Grid.Row="2"/>
+                                        <GridSplitter Grid.ColumnSpan="5" HorizontalAlignment="Stretch" Background="{StaticResource brush_button_background_gray}" Grid.Row="1" ResizeDirection="Rows"/>
+                                        <Border BorderBrush="#FF666466" BorderThickness="2" Margin="10,10,10,0" CornerRadius="4" Grid.ColumnSpan="5">
+                                            <Grid>
+                                                <StackPanel Margin="0">
+                                                    <TextBlock HorizontalAlignment="Center" TextWrapping="WrapWithOverflow" Text="Click-once  solution" VerticalAlignment="Top" Margin="5" FontWeight="Bold" Foreground="Black"/>
+                                                    <Border BorderBrush="{DynamicResource GrayHoverBrush}" BorderThickness="0,1,0,0" Height="3" VerticalAlignment="Top" Margin="15,0"/>
+                                                    <Button Content="Generate" HorizontalAlignment="Right" Margin="0,10,10,0" VerticalAlignment="Top" BorderBrush="#FF5D5D5D" Click="generate_button_click"/>
+                                                </StackPanel>
+
+                                            </Grid>
+                                        </Border>
+                                    </Grid>
+                                </TabItem>
+                                <TabItem x:Name="tab_item_matching" Header="Matching overview" VerticalAlignment="Top">
+                                    <Grid x:Name="matching_ui_grid" Margin="-4" Background="#FFCBCBCB">
+                                        <dpf:matching_ui Stretch="Fill" x:Name="m_ui" Margin="0"/>
+                                    </Grid>
+                                </TabItem>
+                                <TabItem x:Name="tab_item_connections_overview" Header="Connections overview" VerticalAlignment="Top">
+                                    <Grid Margin="-4" Background="#FFCBCBCB">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition Width="10"/>
+                                            <ColumnDefinition Width="0.8*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <dpf:connections_ui Stretch="Fill" x:Name="con_ui" Margin="0"/>
+                                        <ScrollBar Tag="" x:Name="scroll_bar_vertical_connections" HorizontalAlignment="Left" Width="18" Maximum="500" ViewportSize="50" Background="{x:Null}" Margin="0,0,0,18" SmallChange="10" LargeChange="40"/>
+                                        <!--ToolTip="Category view scroll bar" ToolTipOpening="tooltip_opening"-->
+                                        <ScrollBar Orientation="Horizontal" Tag="" x:Name="scroll_bar_horizontal_connections" Maximum="500" ViewportSize="50" Background="{x:Null}" Margin="18,0,0,0" SmallChange="10" LargeChange="40" VerticalAlignment="Bottom" Height="18"/>
+                                        <!--ToolTip="Category view scroll bar" ToolTipOpening="tooltip_opening"-->
+                                        <GridSplitter Grid.Column="1" HorizontalAlignment="Center" Width="10" Background="{StaticResource brush_button_background_gray}" BorderThickness="1,0">
+                                            <GridSplitter.BorderBrush>
+                                                <LinearGradientBrush EndPoint="0,1" StartPoint="0.0,0">
+                                                    <GradientStop Color="#FFCBCBCB" Offset="0"/>
+                                                    <GradientStop Color="Black" Offset="0.5"/>
+                                                    <GradientStop Color="#FFCBCBCB" Offset="1"/>
+                                                </LinearGradientBrush>
+                                            </GridSplitter.BorderBrush>
+                                        </GridSplitter>
+                                        <DataGrid CanUserDeleteRows="True" CanUserAddRows="False" CanUserReorderColumns="False" CanUserSortColumns="False" x:Name="connections_datagrid" Grid.Column="2" FontSize="12" ItemsSource="{Binding}" AutoGenerateColumns="False" >
+                                            <DataGrid.Columns>
+                                                <DataGridTextColumn Header="Connection ID" IsReadOnly="True" Width="Auto" Binding="{Binding connection_id,Mode=TwoWay}"/>
+                                                <DataGridTextColumn Header="Category ID" IsReadOnly="True" Width="Auto" Binding="{Binding cat_id,Mode=TwoWay}"/>
+                                                <DataGridTextColumn Header="Image ID" IsReadOnly="True" Width="Auto" Binding="{Binding image_id,Mode=TwoWay}"/>
+                                                <DataGridTextColumn Header="Point ID" IsReadOnly="True" Width="Auto" Binding="{Binding point_id,Mode=TwoWay}"/>
+                                                <DataGridTextColumn Header="X-coordinate" IsReadOnly="True" Width="Auto" Binding="{Binding x,Mode=TwoWay}"/>
+                                                <DataGridTextColumn Header="Y-coordinate" IsReadOnly="True" Width="Auto" Binding="{Binding y,Mode=TwoWay}"/>
+                                            </DataGrid.Columns>
+                                            <DataGrid.RowStyle>
+                                                <Style TargetType="DataGridRow">
+                                                    <Setter Property="Background" Value="{Binding connection_id, Converter={StaticResource valueToForeground}}" />
+                                                </Style>
+                                            </DataGrid.RowStyle>
+                                        </DataGrid>
+                                
+                                    </Grid>
+                                </TabItem>
+                                
+
+                                <TabItem Header="Settings" HorizontalAlignment="Right" VerticalAlignment="Top">
+                                    <Grid Margin="-4" Background="#FFCBCBCB"/>
+                                </TabItem>
+                                
+                            </TabControl>
+                        </Grid>
+                    </Grid>
+                </Border>
+            </Grid>
+        </Border>
+        <!--<Rectangle x:Name="top_left" Fill="{DynamicResource brush_resize_grips}" MouseDown="resize_mouse_down" MouseMove="resize_mouse_move" MouseUp="resize_mouse_up" Margin="0,0,-3,-3" MouseEnter="resize_mouse_enter" MouseLeave="resize_mouse_leave"/>
+        <Rectangle x:Name="top" Grid.Column="1" Fill="{StaticResource brush_resize_grips}" MouseDown="resize_mouse_down" MouseMove="resize_mouse_move" MouseUp="resize_mouse_up" Margin="3,0,3,-3" MouseEnter="resize_mouse_enter" MouseLeave="resize_mouse_leave"/>
+        <Rectangle x:Name="top_right" Grid.Column="2" Fill="{StaticResource brush_resize_grips}" MouseDown="resize_mouse_down" MouseMove="resize_mouse_move" MouseUp="resize_mouse_up" Margin="-3,0,0,-3" MouseEnter="resize_mouse_enter" MouseLeave="resize_mouse_leave"/>
+        <Rectangle x:Name="right" Grid.Row="1" Grid.Column="2" Fill="{StaticResource brush_resize_grips}" MouseDown="resize_mouse_down" MouseMove="resize_mouse_move" MouseUp="resize_mouse_up" Margin="-3,3,0,3" MouseEnter="resize_mouse_enter" MouseLeave="resize_mouse_leave"/>
+        <Rectangle x:Name="bottom_right" Grid.Row="2" Grid.Column="2" Fill="{StaticResource brush_resize_grips}" MouseDown="resize_mouse_down" MouseMove="resize_mouse_move" MouseUp="resize_mouse_up" Margin="-3,-3,0,0" MouseEnter="resize_mouse_enter" MouseLeave="resize_mouse_leave"/>
+        <Rectangle x:Name="bottom" Grid.Row="2" Grid.Column="1" Fill="{StaticResource brush_resize_grips}" MouseDown="resize_mouse_down" MouseMove="resize_mouse_move" MouseUp="resize_mouse_up" Margin="3,-3,3,0" MouseEnter="resize_mouse_enter" MouseLeave="resize_mouse_leave"/>
+        <Rectangle x:Name="bottom_left" Grid.Row="2" Fill="{StaticResource brush_resize_grips}" MouseDown="resize_mouse_down" MouseMove="resize_mouse_move" MouseUp="resize_mouse_up" Margin="0,-3,-3,0" MouseEnter="resize_mouse_enter" MouseLeave="resize_mouse_leave"/>
+        <Rectangle x:Name="left" Grid.Row="1" Fill="{StaticResource brush_resize_grips}" MouseDown="resize_mouse_down" MouseMove="resize_mouse_move" MouseUp="resize_mouse_up" Margin="0,3,-3,3" MouseEnter="resize_mouse_enter" MouseLeave="resize_mouse_leave"/>-->
+
+
+
+        <!--<Rectangle Name="top_left" Cursor="SizeNWSE" Fill="{StaticResource brush_resize_grips}" MouseDown="resize_mouse_down" MouseMove="resize_mouse_move" MouseUp="resize_mouse_up" Margin="0,0,-3,-3"/>
+        <Rectangle Name="top" Cursor="SizeNS" Grid.Column="1" Fill="{StaticResource brush_resize_grips}" MouseDown="resize_mouse_down" MouseMove="resize_mouse_move" MouseUp="resize_mouse_up" Margin="3,0,3,-3"/>
+        <Rectangle Name="top_right" Cursor="SizeNESW" Grid.Column="2" Fill="{StaticResource brush_resize_grips}" MouseDown="resize_mouse_down" MouseMove="resize_mouse_move" MouseUp="resize_mouse_up" Margin="-3,0,0,-3"/>
+        <Rectangle Name="right" Cursor="SizeWE" Grid.Row="1" Grid.Column="2" Fill="{StaticResource brush_resize_grips}" MouseDown="resize_mouse_down" MouseMove="resize_mouse_move" MouseUp="resize_mouse_up" Margin="-3,3,0,3"/>
+        <Rectangle Name="bottom_right" Cursor="SizeNWSE" Grid.Row="2" Grid.Column="2" Fill="{StaticResource brush_resize_grips}" MouseDown="resize_mouse_down" MouseMove="resize_mouse_move" MouseUp="resize_mouse_up" Margin="-3,-3,0,0"/>
+        <Rectangle Name="bottom" Cursor="SizeNS" Grid.Row="2" Grid.Column="1" Fill="{StaticResource brush_resize_grips}" MouseDown="resize_mouse_down" MouseMove="resize_mouse_move" MouseUp="resize_mouse_up" Margin="3,-3,3,0"/>
+        <Rectangle Name="bottom_left" Cursor="SizeNESW" Grid.Row="2" Fill="{StaticResource brush_resize_grips}" MouseDown="resize_mouse_down" MouseMove="resize_mouse_move" MouseUp="resize_mouse_up" Margin="0,-3,-3,0"/>
+        <Rectangle Name="left" Cursor="SizeWE" Grid.Row="1" Fill="{StaticResource brush_resize_grips}" MouseDown="resize_mouse_down" MouseMove="resize_mouse_move" MouseUp="resize_mouse_up" Margin="0,3,-3,3"/>-->
+
+
+
+
+    </Grid>
+</Window>

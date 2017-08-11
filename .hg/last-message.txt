@@ -1,0 +1,1 @@
+Now displays two Direct2D surfaces at once

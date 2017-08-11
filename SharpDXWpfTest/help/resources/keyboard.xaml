@@ -1,0 +1,40 @@
+﻿<Page x:Class="SharpDXWpfTest.help.resources.keyboard"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      mc:Ignorable="d" 
+      d:DesignHeight="300" d:DesignWidth="300"
+	Title="keyboard">
+
+    <FlowDocumentReader ViewingMode="Scroll" Margin="0">
+        <FlowDocument>
+            <Paragraph TextAlignment="Center"
+                       FontSize="16pt">
+                <Bold>Keyboard interactions</Bold>
+            </Paragraph>
+            <Paragraph>
+                Here you can find the listing of various keyboard commands that helps you control resources user interface:
+            </Paragraph>
+            <Paragraph>
+                1.
+                <Bold>Delete</Bold> selected images by clicking
+                <Bold>delete key</Bold> on the keyboard
+            </Paragraph>
+            <Paragraph>
+                2.
+                <Bold>Add to selection</Bold> by holding
+                <Bold>Left Ctrl</Bold> while selecting images.
+            </Paragraph>
+            <Paragraph>
+                3.
+                <Bold>Remove from selection</Bold> by holding
+                <Bold>Left Alt</Bold> while selecting images.
+            </Paragraph>
+            <Paragraph>
+                4. Hold
+                <Bold>Left Ctrl</Bold> while droping images on empty space under existing categories to put each image into new separate category.
+            </Paragraph>
+        </FlowDocument>
+    </FlowDocumentReader>
+</Page>

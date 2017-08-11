@@ -1,0 +1,36 @@
+﻿<Page x:Class="SharpDXWpfTest.startup_help.pages._8"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      mc:Ignorable="d" 
+      d:DesignHeight="300" d:DesignWidth="300"
+	Title="_8">
+
+    <Grid>
+        <FlowDocumentScrollViewer  Margin="0" VerticalScrollBarVisibility="Hidden" IsSelectionEnabled="False">
+            <FlowDocument>
+                <Paragraph TextAlignment="Center"
+                       FontSize="14pt">
+                    Matching overview
+                </Paragraph>
+                <Paragraph TextAlignment="Justify"
+                       FontSize="12pt">
+                    11. Procede to
+                    <Hyperlink NavigateUri="help/matching/matching.xaml" RequestNavigate="Hyperlink_RequestNavigate">matching overview</Hyperlink> tab by left clicking on "Matching overview" on the bottom of the screen.
+                </Paragraph>
+                <Paragraph TextAlignment="Justify"
+                       FontSize="12pt">
+                    12. Generated match is shown in this tab. 
+                </Paragraph>
+                <Paragraph TextAlignment="Justify"
+                       FontSize="12pt">
+                    13. You can navigate it by
+                    <Hyperlink NavigateUri="help/matching/mouse.xaml" RequestNavigate="Hyperlink_RequestNavigate">mouse</Hyperlink> , mouse wheel to zoom, middle button panning. You can select image by left clicking, reposition them by draging selected images and show and hide
+                    <Hyperlink NavigateUri="help/framework_elements/image_connections.xaml" RequestNavigate="Hyperlink_RequestNavigate">image connections</Hyperlink> or
+                    <Hyperlink NavigateUri="help/framework_elements/feature_points.xaml" RequestNavigate="Hyperlink_RequestNavigate">feature points</Hyperlink> in these images. 
+                </Paragraph>
+            </FlowDocument>
+        </FlowDocumentScrollViewer>
+    </Grid>
+</Page>

@@ -1,0 +1,25 @@
+﻿<Page x:Class="SharpDXWpfTest.startup_help.pages._1"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      mc:Ignorable="d" 
+      d:DesignHeight="300" d:DesignWidth="300"
+	Title="_1">
+
+    <Grid>
+        <FlowDocumentScrollViewer  Margin="0" VerticalScrollBarVisibility="Hidden" IsSelectionEnabled="False">
+            <FlowDocument>
+                <Paragraph TextAlignment="Center"
+                       FontSize="14pt">
+                    Basic workflow
+                </Paragraph>
+                <Paragraph TextAlignment="Justify"
+                       FontSize="12pt">
+                    This tutorial leads you throught the application in simple manner. Be reminded that many of the tasks are achievable by simpler commands or keyboard shortcuts which you can find in the main help. 
+                </Paragraph>
+            </FlowDocument>
+        </FlowDocumentScrollViewer>
+
+    </Grid>
+</Page>

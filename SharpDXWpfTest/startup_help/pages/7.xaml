@@ -1,0 +1,33 @@
+﻿<Page x:Class="SharpDXWpfTest.startup_help.pages._7"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      mc:Ignorable="d" 
+      d:DesignHeight="300" d:DesignWidth="300"
+	Title="_7">
+
+    <Grid>
+        <FlowDocumentScrollViewer  Margin="0" VerticalScrollBarVisibility="Hidden" IsSelectionEnabled="False">
+            <FlowDocument>
+                <Paragraph TextAlignment="Center"
+                       FontSize="14pt">
+                    Generate match
+                </Paragraph>
+                <Paragraph TextAlignment="Justify"
+                       FontSize="12pt">
+                    8. Procede to
+                    <Hyperlink NavigateUri="help/generate/generate.xaml" RequestNavigate="Hyperlink_RequestNavigate">generate match</Hyperlink> tab by left clicking on "Generate match" on the bottom of the screen.
+                </Paragraph>
+                <Paragraph TextAlignment="Justify"
+                       FontSize="12pt">
+                    9. We are going to create simple - one click solution in this tutorial so the only thing you need to do in this tab is to click "Gnerate" button in the "Click-once solution" section on the top of the screen. 
+                </Paragraph>
+                <Paragraph TextAlignment="Justify"
+                       FontSize="12pt">
+                    10. Notice Progress dialog that shows you the progress of calculations. You can cancel it whenever and most of the user interface does not lock while calculating.
+                </Paragraph>
+            </FlowDocument>
+        </FlowDocumentScrollViewer>
+    </Grid>
+</Page>

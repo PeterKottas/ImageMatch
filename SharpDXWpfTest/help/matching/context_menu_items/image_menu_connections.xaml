@@ -1,0 +1,42 @@
+﻿<Page x:Class="SharpDXWpfTest.help.matching.context_menu_items.image_menu_connections"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      mc:Ignorable="d" 
+      d:DesignHeight="300" d:DesignWidth="300"
+	Title="image_menu_connections">
+
+    <FlowDocument>
+        <Paragraph TextAlignment="Center"
+                       FontSize="16pt">
+            <Bold>Image menu connections</Bold>
+        </Paragraph>
+        <Paragraph>
+            <Bold>Image menu connections</Bold> is part of
+            <Hyperlink NavigateUri="../../matching/context_menu_items/image_menu.xaml">image menu</Hyperlink>. You can use it to:
+        </Paragraph>
+        <Paragraph>
+            1.
+            <Bold>Show
+                <Hyperlink NavigateUri="../../framework_elements/image_connections.xaml">image connections</Hyperlink>
+            </Bold> show all image connections to and from this image.   
+        </Paragraph>
+        <Paragraph>
+            2.
+            <Bold>Hide image connections</Bold> hide all image connections to and from this image.
+        </Paragraph>
+        <Paragraph>
+            3.
+            <Bold>Show connections</Bold> show connections between selected images.
+        </Paragraph>
+        <Paragraph>
+            4.
+            <Bold>Hide connections</Bold> hide connections between selected images.
+        </Paragraph>
+        <Paragraph>
+            5.
+            <Bold>Solo connections</Bold> display only connections between selected images and hides other already visible connections.
+        </Paragraph>
+    </FlowDocument>
+</Page>

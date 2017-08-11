@@ -1,0 +1,33 @@
+﻿<Page x:Class="SharpDXWpfTest.help.resources.context_menu_items.image_menu"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      mc:Ignorable="d" 
+      d:DesignHeight="300" d:DesignWidth="300"
+	Title="image_menu">
+
+    <FlowDocument>
+        <Paragraph TextAlignment="Center"
+                       FontSize="16pt">
+            <Bold>Image menu</Bold>
+        </Paragraph>
+        <Paragraph>
+            <Bold>Image menu</Bold> is invoked by right mouse button click on the image in
+            <Hyperlink NavigateUri="../../resources/category_view.xaml">category view</Hyperlink> or
+            <Hyperlink NavigateUri="../../resources/image_pool.xaml">image pool</Hyperlink>. You can use it to :
+        </Paragraph>
+        <Paragraph>
+            1.
+            <Bold>Insert image</Bold> display openfile dialog that lets you choose and load one or multiple images to category. These images are inserted before image that the menu was triggered on.
+        </Paragraph>
+        <Paragraph>
+            2.
+            <Bold>Delete image</Bold> delete image.
+        </Paragraph>
+        <Paragraph>
+            3.
+            <Bold>Replace image</Bold> display openfile dialog that lets you choose and load one or multiple images to category. These images than replace image that the menu was triggered on.
+        </Paragraph>
+    </FlowDocument>
+</Page>

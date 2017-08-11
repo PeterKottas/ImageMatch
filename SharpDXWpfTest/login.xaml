@@ -1,0 +1,663 @@
+﻿<Window x:Class="image_match.login"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        AllowsTransparency="True" WindowStyle="None" Background="Transparent" WindowStartupLocation="CenterScreen"
+ Title="Progress" Height="170" Width="300" ResizeMode="NoResize" >
+    <Window.Resources>
+
+        <Color x:Key="BlackColor">#FF000000</Color>
+        <Color x:Key="WhiteColor">#FFFFFFFF</Color>
+
+        <Color x:Key="Gray1">#FF333333</Color>
+        <Color x:Key="Gray2">#FF7F7F7F</Color>
+        <Color x:Key="Gray7">#FFD8D8D9</Color>
+        <Color x:Key="Gray8">#FFE0E0E0</Color>
+        <Color x:Key="Gray10">#FFF7F7F7</Color>
+
+        <Color x:Key="GrayNormal">#FFBEBEBE</Color>
+        <Color x:Key="GrayHover">#FF333333</Color>
+
+        <Color x:Key="FlyoutDarkColor">#FF252525</Color>
+        <Color x:Key="FlyoutLightColor">#FFFFFFFF</Color>
+
+
+        <!--scroll bar-->
+        <!--<SolidColorBrush x:Key="StandardBorderBrush" Color="Gray"></SolidColorBrush>-->
+        <!-- re-set brushes too -->
+        <SolidColorBrush x:Key="BlackBrush" Color="{StaticResource BlackColor}" />
+        <SolidColorBrush x:Key="TextBrush" Color="{StaticResource BlackColor}" />
+        <SolidColorBrush x:Key="LabelTextBrush" Color="{StaticResource BlackColor}" />
+        <SolidColorBrush x:Key="BlackColorBrush" Color="{StaticResource BlackColor}" />
+        <SolidColorBrush x:Key="TextBoxMouseOverInnerBorderBrush" Color="{StaticResource BlackColor}" />
+        <SolidColorBrush x:Key="TextBoxFocusBorderBrush" Color="{StaticResource BlackColor}" />
+        <SolidColorBrush x:Key="ButtonMouseOverBorderBrush" Color="{StaticResource BlackColor}" />
+        <SolidColorBrush x:Key="ButtonMouseOverInnerBorderBrush" Color="{StaticResource BlackColor}" />
+        <SolidColorBrush x:Key="ComboBoxMouseOverBorderBrush" Color="{StaticResource BlackColor}" />
+        <SolidColorBrush x:Key="ComboBoxMouseOverInnerBorderBrush" Color="{StaticResource BlackColor}" />
+
+        <SolidColorBrush x:Key="ControlBackgroundBrush" Color="{StaticResource WhiteColor}" />
+        <SolidColorBrush x:Key="WhiteBrush" Color="{StaticResource WhiteColor}" />
+        <SolidColorBrush x:Key="WhiteColorBrush" Color="{StaticResource WhiteColor}" />
+        <SolidColorBrush x:Key="DisabledWhiteBrush" Color="{StaticResource WhiteColor}" />
+        <SolidColorBrush x:Key="WindowBackgroundBrush" Color="{StaticResource WhiteColor}" />
+
+        <SolidColorBrush x:Key="{x:Static SystemColors.WindowBrushKey}" Color="{StaticResource WhiteColor}" />
+        <SolidColorBrush x:Key="{x:Static SystemColors.ControlTextBrushKey}" Color="{StaticResource BlackColor}" />
+
+        <LinearGradientBrush x:Key="CheckBoxBackgroundBrush" EndPoint="0.5,1" StartPoint="0.5,0">
+            <GradientStop Color="{StaticResource Gray7}" Offset="0" />
+            <GradientStop Color="{StaticResource WhiteColor}" Offset="1" />
+        </LinearGradientBrush>
+
+        <SolidColorBrush x:Key="GrayBrush1" Color="{StaticResource Gray1}" />
+        <SolidColorBrush x:Key="GrayBrush2" Color="{DynamicResource Gray2}"/>
+        <SolidColorBrush x:Key="GrayBrush7" Color="{StaticResource Gray7}" />
+        <SolidColorBrush x:Key="GrayBrush8" Color="{StaticResource Gray8}" />
+        <SolidColorBrush x:Key="GrayBrush10" Color="{StaticResource Gray10}" />
+
+        <SolidColorBrush x:Key="GrayNormalBrush" Color="{StaticResource GrayNormal}" />
+        <SolidColorBrush x:Key="GrayHoverBrush" Color="{StaticResource GrayHover}" />
+
+        <SolidColorBrush x:Key="CheckBoxMouseOverBrush" Color="{StaticResource Gray1}" />
+
+        <SolidColorBrush x:Key="SliderValueDisabled" Color="#FFBABABA" />
+        <SolidColorBrush x:Key="SliderTrackDisabled" Color="#FFDBDBDB" />
+        <SolidColorBrush x:Key="SliderThumbDisabled" Color="#FFA0A0A0" />
+        <SolidColorBrush x:Key="SliderTrackHover" Color="#FFD0D0D0" />
+        <SolidColorBrush x:Key="SliderTrackNormal" Color="#FFC6C6C6" />
+
+        <SolidColorBrush x:Key="FlyoutDarkBrush" Color="{StaticResource FlyoutDarkColor}" />
+        <SolidColorBrush x:Key="FlyoutLightBrush" Color="{StaticResource FlyoutLightColor}" />
+
+        <SolidColorBrush x:Key="FlatButtonPressedBackgroundBrush" Color="#222222"/>
+
+        <!-- menu brushes -->
+        <SolidColorBrush x:Key="MenuBackgroundBrush" Color="{StaticResource WhiteColor}" />
+        <SolidColorBrush x:Key="ContextMenuBackgroundBrush" Color="{StaticResource WhiteColor}" />
+        <SolidColorBrush x:Key="SubMenuBackgroundBrush" Color="{StaticResource WhiteColor}" />
+
+        <SolidColorBrush x:Key="ContextMenuBorderBrush" Color="{StaticResource BlackColor}" />
+        <SolidColorBrush x:Key="SubMenuBorderBrush" Color="{StaticResource BlackColor}" />
+
+        <SolidColorBrush x:Key="MenuItemSelectionFill" Color="#DEDEDE" />
+        <SolidColorBrush x:Key="MenuItemSelectionStroke" Color="#DEDEDE" />
+
+        <SolidColorBrush x:Key="TopMenuItemPressedFill" Color="#DEDEDE" />
+        <SolidColorBrush x:Key="TopMenuItemPressedStroke" Color="#E0717070" />
+        <SolidColorBrush x:Key="TopMenuItemSelectionStroke" Color="#90717070" />
+
+        <!-- original #FF9A9A9A" -->
+        <SolidColorBrush x:Key="DisabledMenuItemForeground" Color="{StaticResource Gray2}" />
+        <SolidColorBrush x:Key="DisabledMenuItemGlyphPanel" Color="#848589" />
+
+        <SolidColorBrush x:Key="{x:Static SystemColors.MenuTextBrushKey}" Color="{StaticResource BlackColor}" />
+
+        <Color x:Key="MenuShadowColor">#FF000000</Color>
+
+
+        <SolidColorBrush x:Key="brush_resize_grips" Color="#00000000"/>
+        <SolidColorBrush x:Key="brush_black_border" Color="Black"/>
+        <SolidColorBrush x:Key="brush_button_foreground" Color="#99FFFFFF"/>
+        <SolidColorBrush x:Key="brush_button_foreground_mouse_over" Color="White"/>
+        <SolidColorBrush x:Key="brush_button_background" Color="Transparent"/>
+        <SolidColorBrush x:Key="brush_button_background_pressed" Color="#3F000000"/>
+        <SolidColorBrush x:Key="brush_button_background_mouse_over" Color="#3FFFFFFF"/>
+        <SolidColorBrush x:Key="tab_background" Color="#FFCBCBCB"/>
+
+
+        <!--<SolidColorBrush x:Key="StandardBrush" Color="#FFA9A9A9"></SolidColorBrush>-->
+        <SolidColorBrush x:Key="PressedBrush" Color="#3F000000"/>
+        <SolidColorBrush x:Key="HoverBrush" Color="#fefefe"/>
+        <SolidColorBrush x:Key="GlyphBrush" Color="#333333"/>
+        <SolidColorBrush x:Key="StandardBrush" Color="#FF89C9EE"/>
+        <SolidColorBrush x:Key="StandardBorderBrush" Color="Black"/>
+        <!--scroll bar-->
+
+        <Color x:Key="brush_button_background_color">#00FFFFFF</Color>
+        <Color x:Key="brush_button_background_mouse_over_color" >#7FFFFFFF</Color>
+        <Color x:Key="brush_button_foreground_color">#99FFFFFF</Color>
+        <Color x:Key="brush_button_foreground_mouse_over_color" >#FFFFFFFF</Color>
+
+
+        <LinearGradientBrush x:Key="brush_gradient_tabitem_not_selected" EndPoint="0,1" StartPoint="0,0">
+            <GradientStop Color="#FF7E7E7E" Offset="0"/>
+            <GradientStop Color="#FFA9A9A9" Offset="0.1"/>
+        </LinearGradientBrush>
+        <SolidColorBrush x:Key="brush_button_background_gray" Color="#FFCBCBCB"/>
+        <SolidColorBrush x:Key="brush_button_background_mouse_pressed" Color="#7F000000"/>
+        <LinearGradientBrush x:Key="brush_gradient_background" EndPoint="1,1" StartPoint="0,0">
+            <GradientStop Color="#FF5E97DC" Offset="0"/>
+            <GradientStop Color="#FF89C9EE" Offset="1"/>
+        </LinearGradientBrush>
+        <LinearGradientBrush x:Key="brush_gradient_border" EndPoint="1,1" StartPoint="0,0">
+            <GradientStop Color="Transparent" Offset="0"/>
+            <GradientStop Color="Gray" Offset="0.5"/>
+            <GradientStop Color="Transparent" Offset="1"/>
+        </LinearGradientBrush>
+        <LinearGradientBrush x:Key="brush_gradient_border_vertical" EndPoint="0,0" StartPoint="0,1">
+            <GradientStop Color="#005E97DC" Offset="0"/>
+            <GradientStop Color="Gray" Offset="0.5"/>
+            <GradientStop Color="#0089C9EE" Offset="1"/>
+        </LinearGradientBrush>
+        <LinearGradientBrush x:Key="brush_gradient_border_vertical_white" EndPoint="0,0" StartPoint="0,1">
+            <GradientStop Color="#005E97DC" Offset="0"/>
+            <GradientStop Color="White" Offset="0.5"/>
+            <GradientStop Color="#0089C9EE" Offset="1"/>
+        </LinearGradientBrush>
+        <Style x:Key="SquareButtonStyle"
+           TargetType="{x:Type Button}">
+            <Setter Property="Foreground"
+        		Value="{StaticResource brush_button_foreground}" />
+
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Grid>
+                            <Border x:Name="BG"
+                                
+        						BorderBrush="{StaticResource brush_gradient_border_vertical}"
+        						BorderThickness="0,0,0,0"
+        						Background="Transparent" 
+        						Opacity="1"
+                                    />
+                            <ContentPresenter x:Name="contentPresenter"
+        						ContentTemplate="{TemplateBinding ContentTemplate}"
+        						HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+        						Margin="{TemplateBinding Padding}"
+        						RecognizesAccessKey="True"
+        						VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+        						OpacityMask="{x:Null}" />
+                        </Grid>
+
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Foreground" Value="{StaticResource brush_button_foreground_mouse_over}"/>
+                                <Setter TargetName="BG" Property="Background" Value="{StaticResource brush_button_background_mouse_over}"/>
+                                <Setter TargetName="BG" Property="BorderThickness" Value="1,0,1,0"/>
+                                <Setter TargetName="BG" Property="BorderBrush" Value="{StaticResource brush_gradient_border_vertical}"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="False">
+                                <Setter Property="Foreground" Value="{StaticResource brush_button_foreground}"/>
+                                <Setter TargetName="BG" Property="Background" Value="{StaticResource brush_button_background}"/>
+                                <Setter TargetName="BG" Property="BorderThickness" Value="0,0,0,0"/>
+                                <Setter TargetName="BG" Property="BorderBrush" Value="{StaticResource brush_gradient_border_vertical}"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter Property="Foreground" Value="{StaticResource brush_button_foreground_mouse_over}"/>
+                                <Setter TargetName="BG" Property="Background" Value="{StaticResource brush_button_background_pressed}"/>
+                                <Setter TargetName="BG" Property="BorderThickness" Value="1,0,1,0"/>
+                                <Setter TargetName="BG" Property="BorderBrush" Value="{StaticResource brush_gradient_border_vertical_white}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="VerticalScrollBarThumbStyle" TargetType="{x:Type Thumb}">
+            <Setter Property="IsTabStop" Value="False"/>
+            <Setter Property="Focusable" Value="False"/>
+            <Setter Property="Margin" Value="1,0,1,0" />
+            <Setter Property="BorderBrush" Value="{StaticResource StandardBorderBrush}" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Thumb}">
+                        <Rectangle Width="18" x:Name="ellipse"  Stroke="{StaticResource StandardBorderBrush}" Margin="5,5,-1,4"  
+        					Fill="{StaticResource StandardBrush}"
+        					RadiusX="4" RadiusY="4"/>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter TargetName="ellipse" Property="Fill" Value="{StaticResource HoverBrush}"/>
+                            </Trigger>
+                            <Trigger Property="IsDragging" Value="True">
+                                <Setter TargetName="ellipse" Property="Fill" Value="{StaticResource PressedBrush}"/>
+                            </Trigger>
+
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="HorizontalScrollBarThumbStyle" TargetType="{x:Type Thumb}">
+            <Setter Property="IsTabStop" Value="False"/>
+            <Setter Property="Focusable" Value="False"/>
+            <Setter Property="Margin" Value="0,1,0,1" />
+            <Setter Property="BorderBrush" Value="{StaticResource StandardBorderBrush}" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Thumb}">
+                        <Rectangle Height="8" x:Name="ellipse"  Stroke="{StaticResource StandardBorderBrush}"
+        					Fill="{StaticResource StandardBrush}"
+        					RadiusX="5" RadiusY="5"/>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter TargetName="ellipse" Property="Fill" Value="{StaticResource HoverBrush}"/>
+                            </Trigger>
+                            <Trigger Property="IsDragging" Value="True">
+                                <Setter TargetName="ellipse" Property="Fill" Value="{StaticResource PressedBrush}"/>
+                            </Trigger>
+
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="LineButtonUpStyle" TargetType="{x:Type RepeatButton}">
+            <Setter Property="Focusable" Value="False"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type RepeatButton}">
+                        <Grid Margin="0" Height="18" >
+                            <Path Stretch="Fill" HorizontalAlignment="Center" Margin="0,0,0,0" 
+        						VerticalAlignment="Center" x:Name="Path"  Fill="{StaticResource StandardBrush}"
+        						Data="M 0,0 L 0,7.5 A 2.5,2.5 45 0 0 2.5,10 L 10,10 L 10 0"/>
+                            <Path Stretch="Fill" HorizontalAlignment="Center" Margin="0,0,0,0" Stroke="{StaticResource StandardBorderBrush}" StrokeStartLineCap="Square" StrokeEndLineCap="Square"
+        						VerticalAlignment="Center" x:Name="Path2" Data="M 0,0 L 0,7.5 A 2.5,2.5 45 0 0 2.5,10 L 10,10"/>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter TargetName="Path" Property="Fill"
+        							Value="{StaticResource HoverBrush}" />
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="true">
+                                <Setter TargetName="Path" Property="Fill"
+        							Value="{StaticResource PressedBrush}" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="LineButtonDownStyle" TargetType="{x:Type RepeatButton}">
+            <Setter Property="Focusable" Value="False"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type RepeatButton}">
+                        <Grid Margin="0" Height="17" >
+                            <Path Stretch="Fill" HorizontalAlignment="Center" Margin="0,0,0,-1" 
+        						VerticalAlignment="Center" x:Name="Path"  Fill="{StaticResource StandardBrush}"
+        						Data="M 10,0 L 2.5,0 A 2.5,2.5 45 0 0 0,2.5 L 0,10 L 10 10"/>
+                            <Path Stretch="Fill" HorizontalAlignment="Center" Margin="0,0,0,-1" Stroke="{StaticResource StandardBorderBrush}" StrokeStartLineCap="Square" StrokeEndLineCap="Square"
+        						VerticalAlignment="Center" x:Name="Path2" Data="M 10,0 L 2.5,0 A 2.5,2.5 45 0 0 0,2.5 L 0,10 "/>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter TargetName="Path" Property="Fill"
+        							Value="{StaticResource HoverBrush}" />
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="true">
+                                <Setter TargetName="Path" Property="Fill"
+        							Value="{StaticResource PressedBrush}" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="LineButtonLeftStyle" TargetType="{x:Type RepeatButton}">
+            <Setter Property="Focusable" Value="False"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type RepeatButton}">
+                        <Grid Margin="1" Width="18" >
+                            <Path Stretch="None" HorizontalAlignment="Center"
+        						VerticalAlignment="Center" x:Name="Path"  Fill="{StaticResource StandardBrush}"
+        						Data="M 0 0 L -8 4 L 0 8 Z"/>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter TargetName="Path" Property="Fill"
+        							Value="{StaticResource HoverBrush}" />
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="true">
+                                <Setter TargetName="Path" Property="Fill"
+        							Value="{StaticResource PressedBrush}" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="LineButtonRightStyle" TargetType="{x:Type RepeatButton}">
+            <Setter Property="Focusable" Value="False"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type RepeatButton}">
+                        <Grid Margin="1" Width="18" >
+                            <Path Stretch="None" HorizontalAlignment="Center"
+        						VerticalAlignment="Center" x:Name="Path"  Fill="{StaticResource StandardBrush}"
+        						Data="M 0 0 L 8 4 L 0 8 Z"/>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter TargetName="Path" Property="Fill"
+        							Value="{StaticResource HoverBrush}" />
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="true">
+                                <Setter TargetName="Path" Property="Fill"
+        							Value="{StaticResource PressedBrush}" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="ScrollBarPageButtonStyle" TargetType="{x:Type RepeatButton}">
+            <Setter Property="IsTabStop" Value="False"/>
+            <Setter Property="Focusable" Value="False"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type RepeatButton}">
+                        <Border Background="Transparent" />
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <ControlTemplate x:Key="VerticalScrollBar" TargetType="{x:Type ScrollBar}">
+            <Grid Background="Transparent">
+                <Grid.RowDefinitions>
+                    <RowDefinition MaxHeight="18"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition MaxHeight="18"/>
+                </Grid.RowDefinitions>
+
+                <RepeatButton Grid.Row="0" Height="18"
+        			Style="{StaticResource LineButtonUpStyle}"
+        			Command="ScrollBar.LineUpCommand" />
+
+                <Track x:Name="PART_Track" Grid.Row="1" IsDirectionReversed="True" >
+                    <Track.DecreaseRepeatButton>
+                        <RepeatButton Command="ScrollBar.PageUpCommand"
+        					Style="{StaticResource ScrollBarPageButtonStyle}"/>
+                    </Track.DecreaseRepeatButton>
+                    <Track.Thumb>
+                        <Thumb Style="{StaticResource VerticalScrollBarThumbStyle}"/>
+                    </Track.Thumb>
+                    <Track.IncreaseRepeatButton>
+                        <RepeatButton Command="ScrollBar.PageDownCommand"
+        					Style="{StaticResource ScrollBarPageButtonStyle}"/>
+                    </Track.IncreaseRepeatButton>
+                </Track>
+
+                <RepeatButton Grid.Row="2" Height="18"
+        			Style="{StaticResource LineButtonDownStyle}"
+        			Command="ScrollBar.LineDownCommand"/>
+            </Grid>
+        </ControlTemplate>
+        <ControlTemplate x:Key="HorizontalScrollBar" TargetType="{x:Type ScrollBar}">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition MaxWidth="18"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition MaxWidth="18"/>
+                </Grid.ColumnDefinitions>
+                <Grid.Background>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                        <GradientStop Offset="0" Color="#4c4c4c"/>
+                        <GradientStop Offset="1" Color="#434343"/>
+                    </LinearGradientBrush>
+                </Grid.Background>
+                <RepeatButton Grid.Column="0" Width="18"
+        			Style="{StaticResource LineButtonLeftStyle}"
+        			Command="ScrollBar.LineLeftCommand" />
+
+                <Track x:Name="PART_Track" Grid.Column="1" IsDirectionReversed="False" >
+                    <Track.DecreaseRepeatButton>
+                        <RepeatButton Command="ScrollBar.PageLeftCommand"
+        					Style="{StaticResource ScrollBarPageButtonStyle}"/>
+                    </Track.DecreaseRepeatButton>
+                    <Track.Thumb>
+                        <Thumb Style="{StaticResource HorizontalScrollBarThumbStyle}"/>
+                    </Track.Thumb>
+                    <Track.IncreaseRepeatButton>
+                        <RepeatButton Command="ScrollBar.PageRightCommand"
+        					Style="{StaticResource ScrollBarPageButtonStyle}"/>
+                    </Track.IncreaseRepeatButton>
+                </Track>
+                <RepeatButton Grid.Column="2" Width="18"
+        			Style="{StaticResource LineButtonRightStyle}"
+        			Command="ScrollBar.LineRightCommand"/>
+            </Grid>
+        </ControlTemplate>
+        <Style x:Key="ScrollBar" TargetType="{x:Type ScrollBar}">
+            <Setter Property="SnapsToDevicePixels" Value="True"/>
+            <Setter Property="OverridesDefaultStyle" Value="true"/>
+            <Style.Triggers>
+                <Trigger Property="Orientation" Value="Vertical">
+                    <Setter Property="Width" Value="18"/>
+                    <Setter Property="Height" Value="Auto" />
+                    <Setter Property="Template" Value="{StaticResource VerticalScrollBar}" />
+                </Trigger>
+                <Trigger Property="Orientation" Value="Horizontal">
+                    <Setter Property="Width" Value="Auto"/>
+                    <Setter Property="Height" Value="18" />
+                    <Setter Property="Template" Value="{StaticResource HorizontalScrollBar}" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style TargetType="{x:Type Button}">
+            <Setter Property="MinHeight"
+                Value="25" />
+            <Setter Property="Background"
+                Value="{DynamicResource GrayBrush10}" />
+            <Setter Property="BorderBrush"
+                Value="{DynamicResource TextBoxBorderBrush}" />
+            <Setter Property="Foreground"
+                Value="{DynamicResource TextBrush}" />
+            <Setter Property="Padding"
+                Value="10,3,10,3" />
+            <Setter Property="BorderThickness"
+                Value="1" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Grid>
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup x:Name="CommonStates">
+                                    <VisualState x:Name="Normal" />
+                                    <VisualState x:Name="MouseOver">
+                                        <Storyboard>
+                                            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)"
+                                				Storyboard.TargetName="MouseOverBorder">
+                                                <EasingDoubleKeyFrame KeyTime="0"
+                                					Value="1" />
+                                            </DoubleAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="Pressed">
+                                        <Storyboard>
+                                            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)"
+                                				Storyboard.TargetName="PressedBorder">
+                                                <EasingDoubleKeyFrame KeyTime="0"
+                                					Value="1" />
+                                            </DoubleAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="Disabled">
+                                        <Storyboard>
+                                            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="Opacity"
+                                				Storyboard.TargetName="DisabledVisualElement">
+                                                <SplineDoubleKeyFrame KeyTime="0"
+                                					Value="0.7" />
+                                            </DoubleAnimationUsingKeyFrames>
+                                            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)"
+                                				Storyboard.TargetName="contentPresenter">
+                                                <EasingDoubleKeyFrame KeyTime="0"
+                                					Value="0.3" />
+                                            </DoubleAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                </VisualStateGroup>
+                                <VisualStateGroup x:Name="FocusStates">
+                                    <VisualState x:Name="Focused">
+                                        <Storyboard>
+                                            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)"
+                                				Storyboard.TargetName="FocusRectangle">
+                                                <EasingDoubleKeyFrame KeyTime="0"
+                                					Value="1" />
+                                            </DoubleAnimationUsingKeyFrames>
+                                            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)"
+                                				Storyboard.TargetName="FocusInnerRectangle">
+                                                <EasingDoubleKeyFrame KeyTime="0"
+                                					Value="1" />
+                                            </DoubleAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="Unfocused" />
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+                            <Border x:Name="Background"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                Background="{TemplateBinding Background}"
+                                CornerRadius="3" />
+                            <Rectangle x:Name="DisabledVisualElement"
+                                   Fill="{DynamicResource ControlsDisabledBrush}"
+                                   IsHitTestVisible="false"
+                                   Opacity="0"
+                                   RadiusY="3"
+                                   RadiusX="3" />
+                            <Border x:Name="MouseOverBorder"
+                                Background="{DynamicResource GrayBrush8}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="3.5"
+                                Opacity="0" />
+                            <Border x:Name="PressedBorder"
+                                Background="{DynamicResource GrayBrush7}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="3.5"
+                                Opacity="0" />
+                            <Rectangle x:Name="FocusRectangle"
+                                   Stroke="{DynamicResource ButtonMouseOverInnerBorderBrush}"
+                                   RadiusY="4"
+                                   RadiusX="4"
+                                   Margin="-1"
+                                   Opacity="0" />
+                            <Rectangle x:Name="FocusInnerRectangle"
+                                   StrokeThickness="{TemplateBinding BorderThickness}"
+                                   Stroke="{DynamicResource ButtonMouseOverBorderBrush}"
+                                   RadiusX="3"
+                                   RadiusY="3"
+                                   Opacity="0" />
+                            <ContentPresenter x:Name="contentPresenter"
+                                          RecognizesAccessKey="True"
+                                          ContentTemplate="{TemplateBinding ContentTemplate}"
+                                          HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                          Margin="{TemplateBinding Padding}"
+                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+    </Window.Resources>
+    <Grid x:Name="app_grid" Margin="0">
+
+        <Border x:Name="ShadowBorder" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Column="1" Grid.Row="1">
+            <!--<Border.Effect>
+                <DropShadowEffect Color="Black" ShadowDepth="0" Opacity="1" BlurRadius="4"/>
+            </Border.Effect>-->
+            <Grid>
+                <Border x:Name="MainBorder" BorderBrush="#33000000"  BorderThickness="2">
+                    <Grid x:Name="MainGrid" Margin="0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="30"/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Grid Grid.Row="1">
+                            <Grid.Background>
+                                <LinearGradientBrush EndPoint="0.0,1" StartPoint="1,0">
+                                    <GradientStop Color="#FFABC5D8"/>
+                                    <GradientStop Color="#FFABC2D3" Offset="1"/>
+                                </LinearGradientBrush>
+                            </Grid.Background>
+
+                            <Border BorderBrush="#99000000" BorderThickness="1" Height="135" Margin="5,-5,5,0" VerticalAlignment="Top" CornerRadius="5">
+                                <Border.Background>
+                                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                        <GradientStop Color="#33000000" Offset="0"/>
+                                        <GradientStop Color="#66000000" Offset="1"/>
+                                    </LinearGradientBrush>
+                                </Border.Background>
+                                <Grid Margin="0">
+                                    <Rectangle HorizontalAlignment="Left" Height="2" Margin="0,51,0,0" VerticalAlignment="Top" Width="284">
+                                        <Rectangle.Fill>
+                                            <RadialGradientBrush>
+                                                <GradientStop Color="#00000000" Offset="0.8"/>
+                                                <GradientStop Color="#66000000" Offset="0.6"/>
+                                            </RadialGradientBrush>
+                                        </Rectangle.Fill>
+                                    </Rectangle>
+                                    <Button MinHeight="18" VerticalContentAlignment="Top" HorizontalContentAlignment="Center" Margin="0,0,5,5" VerticalAlignment="Bottom" Height="25" HorizontalAlignment="Right" Width="58" BorderBrush="#FFB1B1B1" Click="Button_Click2">
+                                        <Button.Background>
+                                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                                <GradientStop Color="#FFE6E6E6" Offset="0"/>
+                                                <GradientStop Color="#FFBCBCBC" Offset="1"/>
+                                                <GradientStop Color="#FFBBBBBB" Offset="0.539"/>
+                                                <GradientStop Color="#FFE3E3E3" Offset="0.536"/>
+                                            </LinearGradientBrush>
+                                        </Button.Background>
+                                        <TextBlock Margin="0,0,0,0" Foreground="Black" FontFamily="Segoe UI Light" FontSize="14"><Run Text="Login"/><LineBreak/><Run/></TextBlock>
+                                    </Button>
+                                    <Button MinHeight="18" VerticalContentAlignment="Top" HorizontalContentAlignment="Center" Margin="0,0,68,5" VerticalAlignment="Bottom" Height="25" HorizontalAlignment="Right" Width="58" BorderBrush="#FFB1B1B1" Click="Button_Click">
+                                        <Button.Background>
+                                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                                <GradientStop Color="#FFE6E6E6" Offset="0"/>
+                                                <GradientStop Color="#FFBCBCBC" Offset="1"/>
+                                                <GradientStop Color="#FFBBBBBB" Offset="0.539"/>
+                                                <GradientStop Color="#FFE3E3E3" Offset="0.536"/>
+                                            </LinearGradientBrush>
+                                        </Button.Background>
+                                        <TextBlock Margin="0,0,0,0" Foreground="Black" FontFamily="Segoe UI Light" FontSize="14"><Run Text="Cancel"/><LineBreak/><Run/></TextBlock>
+                                    </Button>
+                                    <TextBox VerticalAlignment="Top" x:Name="search_tb" Margin="10,18,5,0" BorderBrush="#FF727171" Height="23" FontSize="12">
+
+                                    </TextBox>
+
+                                    <TextBlock IsHitTestVisible="False" Text="User name" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="16,22,0,94" Foreground="DarkGray" Height="17" FontSize="12">
+                                        <TextBlock.Style>
+                                            <Style TargetType="{x:Type TextBlock}">
+                                                <Setter Property="Visibility" Value="Collapsed"/>
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding Text, ElementName=search_tb}" Value="">
+                                                        <Setter Property="Visibility" Value="Visible"/>
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </TextBlock.Style>
+                                    </TextBlock>
+                                    <PasswordBox HorizontalAlignment="Left" x:Name="search_tb_Copy" Height="23" Margin="10,67,0,0" VerticalAlignment="Top" Width="189" BorderBrush="#FF727171" Password="" PasswordChanged="search_tb_Copy_PasswordChanged"/>
+                                    <TextBlock x:Name="pass_help" IsHitTestVisible="False" Text="Password" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="16,70,0,46" Foreground="DarkGray" Height="17" FontSize="12">
+
+                                    </TextBlock>
+                                    <TextBox x:Name="status" Padding="0" HorizontalAlignment="Left" Margin="10,106,0,0" TextWrapping="Wrap" Text="Enter credentials" VerticalAlignment="Top" Width="143" BorderBrush="{x:Null}" Background="{x:Null}" Foreground="White" IsReadOnly="True" FontFamily="Segoe UI Light"/>
+                                    <CheckBox Content="Autologin" HorizontalAlignment="Left" Height="19" Margin="204,71,0,0" VerticalAlignment="Top" Width="70" Foreground="White" FontFamily="Segoe UI Light"/>
+
+
+                                </Grid>
+                            </Border>
+
+
+
+                        </Grid>
+                        <Border x:Name="TitleBar" Background="{StaticResource brush_gradient_background}" BorderBrush="Black" BorderThickness="0,0,0,1" MouseDown="TitleBar_MouseDown" MouseMove="TitleBar_MouseMove" MouseUp="TitleBar_MouseUp"/>
+                        <Border BorderBrush="#33898686" BorderThickness="0" HorizontalAlignment="Left" Height="29" Margin="954,0,0,0" VerticalAlignment="Top" Width="1" Background="{DynamicResource brush_gradient_border_vertical}"/>
+                        <Border Margin="0,0,0,1" Width="139" HorizontalAlignment="Left">
+                            <TextBlock  MouseDown="TitleBar_MouseDown" MouseMove="TitleBar_MouseMove" MouseUp="TitleBar_MouseUp" TextWrapping="Wrap" Text="PLEASE LOGIN TO ACCESS APP" VerticalAlignment="Center" Foreground="{DynamicResource brush_button_foreground_mouse_over}" Margin="5,2,-161,3" FontSize="19" FontFamily="Segoe UI Light" Width="295" HorizontalAlignment="Left" />
+                        </Border>
+                        <Button x:Name="minimize_but" Style="{StaticResource SquareButtonStyle}" HorizontalAlignment="Right" Margin="0,-1,0,0" Click="minimize_window" Width="31">
+                            <Path Data="F1M0,6L0,9 9,9 9,6 0,6z"
+								SnapsToDevicePixels="True"
+								Fill="{Binding Foreground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Button}}}" />
+                        </Button>
+
+
+                    </Grid>
+                </Border>
+            </Grid>
+        </Border>
+
+    </Grid>
+</Window>
+
